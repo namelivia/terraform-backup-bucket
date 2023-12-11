@@ -1,6 +1,13 @@
-provider "aws" {
-  region = "eu-west-1"
+terraform {
+  required_version = ">= 1.0.11"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
 }
+
 
 resource "aws_s3_bucket" "restic_backup" {
   bucket = "${var.bucket_name}"
