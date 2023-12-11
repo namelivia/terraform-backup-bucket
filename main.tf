@@ -33,7 +33,13 @@ data "aws_iam_policy_document" "s3_policy" {
         "s3:PutObject",
         "s3:GetObject"
       ],
-      "Resource": [
+      "Principal": {
+        "AWS": [
+          "${aws_iam_user.s3_user.arn}",
+          "${aws_iam_role.s3_role.arn}"
+        ]
+      },
+      Resource": [
         "${aws_s3_bucket.restic_backup.arn}/*"
       ]
     }
