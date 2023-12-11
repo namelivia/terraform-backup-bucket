@@ -33,8 +33,8 @@ resource "aws_iam_user_policy" "s3_user_policy" {
       "Effect": "Allow",
       "Action": "s3:*",
       "Resource": [
-        "arn:aws:s3:::{var.bucket_name}",
-        "arn:aws:s3:::{var.bucket_name}/*"
+        "arn:aws:s3:::${var.bucket_name}",
+        "arn:aws:s3:::${var.bucket_name}/*"
       ]
     }
   ]
