@@ -25,20 +25,15 @@ resource "aws_iam_access_key" "s3_user_access_key" {
 data "aws_iam_policy_document" "s3_policy" {
   source_json = <<JSON
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject"
-      ],
+    "Version": "2012-10-17",
+    "Id": "Policy${var.bucket_name}",
+    "Statement": [{
+      "Sid": "AllowAllS3Actions",
       "Principal": "*",
-      "Resource": [
-        "${aws_s3_bucket.restic_backup.arn}/*"
-      ]
-    }
-  ]
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::${var.bucket_name}/*"
+    }]
 }
 JSON
 }
